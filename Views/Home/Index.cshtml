@@ -1,0 +1,26 @@
+﻿
+@{
+    ViewBag.Title = "User Home Page";
+}
+
+<h2>@ViewBag.Title</h2>
+
+
+@Html.ActionLink("Movies Available for Purchase", "Index", "Movie") <br />
+@Html.ActionLink("Purchased Movies", "PurchasedList", "Movie") <br />
+Count of Movies Watched: @ViewBag.MovieCount <br />
+Total Money Spent Watching Movies: @ViewBag.MoneySpent <br />
+<input type="text" name="tag" id="tag"> <button onclick="search()">Search</button>
+
+@section Scripts{
+    <script>
+        function search() {
+            var searchfield = document.getElementById('tag').value
+            if (searchfield != "") {
+                window.location.href = "/movie/search/"+searchfield;
+            } else {
+                window.location.href = "/movie/PurchasedList/";
+            }
+        }
+    </script>
+}

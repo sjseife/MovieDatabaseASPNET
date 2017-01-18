@@ -1,0 +1,87 @@
+﻿@model IEnumerable<Project2.Models.ViewedMovie>
+
+@{
+    ViewBag.Title = "Purchased Rentals With " + ViewBag.MovieTag + "Tag";
+}
+
+<h2>@ViewBag.Title</h2>
+
+
+<table class="table table-striped table-bordered dt-responsive" cellspacing="0" id="MovieTable">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Year)
+            </th>
+            <th>
+                Length
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                Movie Tags
+            </th>
+            <th>
+                Action
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Year)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LengthInMinutes) Minutes
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+
+                </td>
+                <td>
+                    @foreach (var tag in ViewBag.tags)
+                    {
+                        if (@tag.MovieId == item.Id)
+                        {
+                            @tag.MovieTag <br />
+                        }
+                    }
+                </td>
+                <td style="text-align:center;">
+                    <button onclick="manageTags(@item.Id)">Manage Tags</button>
+                    <button onclick="detailsPage(@item.Id)">Details</button>
+                    <button onclick="rewatch('@item.IMDBUrl')">Watch Again</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+
+</table>
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $('#MovieTable').DataTable();
+        });
+
+        function rewatch(link) {
+                window.location.href = link;
+        }
+
+        function detailsPage(id) {
+                window.location.href = "/movie/detailsowned/"+id;
+        }
+
+        function manageTags(id) {
+                window.location.href = "/movie/tags/"+id;
+        }
+    </script>
+}

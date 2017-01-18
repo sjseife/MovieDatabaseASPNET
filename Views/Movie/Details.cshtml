@@ -1,0 +1,70 @@
+﻿@model Project2.Models.Movie
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Movie</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Year)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Year)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LengthInMinutes)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LengthInMinutes)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+
+    </dl>
+</div>
+<div class="col-md-offset-1">
+    
+    <button onclick="confirmPurchase()">Watch</button>
+    <button onclick="backToList()">Back to list</button>
+
+</div>
+@section Scripts{
+    <script>
+
+
+        function confirmPurchase() {
+            var model = @Html.Raw(Json.Encode(Model));
+
+            if (confirm("Your credit card will be charged $" + model.Price + "! Press Ok to accept charges.") == true) {
+                window.location.href = "/movie/watch/"+model.Id;
+            } else {
+
+            }
+        }
+        function backToList() {
+            window.location.href = "/movie/index/";
+        }
+    </script>
+}

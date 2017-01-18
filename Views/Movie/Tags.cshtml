@@ -1,0 +1,33 @@
+﻿@model IEnumerable<Project2.Models.Tag>
+
+@{
+    ViewBag.Title = "Tags";
+}
+
+<h2>Tags</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create", new { id = ViewBag.Id })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Movie Tags
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.MovieTag)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "TagDetails", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>

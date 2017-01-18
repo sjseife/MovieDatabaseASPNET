@@ -1,0 +1,12 @@
+﻿.nav-banner{
+     background-image: url(/Content/Images/Movie-Banner.jpg); 
+     width: 200px; 
+     height: 50px; 
+     background-size: cover;
+     margin-right: 15px;
+     margin-left: 3px;
+}
+.navbar{
+   background-color: #152B39!important;
+}
+
